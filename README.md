@@ -1,6 +1,6 @@
 # onko-pyodide
 
-Proof-of-concept for displaying DICOM files within a Pyodide WebAssembly environment. 
+Proof-of-concept for displaying DICOM files within a Pyodide WebAssembly environment. Part of the [OnkoDicom](https://onkodicom.com.au/) project.
 
 ## How to run
 
