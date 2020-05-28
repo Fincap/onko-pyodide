@@ -3,11 +3,16 @@ def pydicom_init(*args):
 	import pydicom
 	print("PyDicom initialized")
 
+#def mpld3_init(*args):
+#	import mpld3
+#	print("mpld3 initialized")
+
 global dataset_input
 global current_dataset
 
 import micropip
 micropip.install('pydicom').then(pydicom_init)
+#micropip.install('mpld3').then(mpld3_init)
 `;
 
 loadDicom = `
@@ -18,7 +23,6 @@ with open("dicomfile.dcm", "wb") as f:
 	f.write(dataset_input.tobytes())
 
 current_dataset = pydicom.dcmread("dicomfile.dcm")
-print(current_dataset)
 
 document.getElementById("patientname").innerHTML = current_dataset.PatientName
 document.getElementById("patientid").innerHTML = current_dataset.PatientID
@@ -30,20 +34,18 @@ displayDicom = `
 import numpy
 import matplotlib.pyplot as plt
 
-'''const_pixel_dims = (int(current_dataset.Rows), int(current_dataset.Columns), 1)
-const_pixel_spacing = (float(current_dataset.PixelSpacing[0]), float(current_dataset.PixelSpacing[1]), float(current_dataset.SliceThickness))
-
-array_dicom = numpy.zeros(const_pixel_dims, dtype=current_dataset.pixel_array.dtype)'''
-
-f = plt.figure()
+f = plt.figure(frameon=False)
 plt.imshow(current_dataset.pixel_array, cmap=plt.cm.bone)
+plt.axis('off')
 
 def create_root_element(self):
 	return document.getElementById('dicomimage')
 
+# There is currently an issue within pyodide which results in matplotlib graphs not showing outside an Iodide environment.
 # This is replacing the create_root_element function in the base class of f.canvas with our version, so that it works outside of Iodide
 f.canvas.create_root_element = create_root_element.__get__(create_root_element, f.canvas.__class__)
 f.canvas.show()
+plt.close(f)
 `
 
 onkoInitialized = false;
