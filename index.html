@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+	<title>Python wasm</title>
+
+	<style>
+		.text {
+			font-size: 14pt;
+			font-family: -apple-system, BlinkMacSystemFont, 
+                "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, 
+                "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, 
+                sans-serif, "Apple Color Emoji", "Segoe UI Emoji", 
+                "Segoe UI Symbol";
+		}
+	</style>
+</head>
+
+<body>
+	<script type="text/javascript" src="https://pyodide-cdn2.iodide.io/v0.15.0/full/pyodide.js"></script>
+
+	<div class="text" id="status">Initializing Python...</div></i>
+	<div id="uielements">
+		<input type="file" id="fileupload">
+		<div id="patientinfo">
+			Patient name: <span id="patientname"></span> <br />
+			Patient ID: <span id="patientid"></span> <br />
+			Patient Sex: <span id="patientsex"></span> <br />
+			Patient DOB: <span id="patientdob"></span> <br />
+			<input type="button" id="displaydcmimage" value="Display Image">
+			<div id="dicomimage"></div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" src="onkoscripts/displaydicom.js"></script>
+
+</body>
+</html>
